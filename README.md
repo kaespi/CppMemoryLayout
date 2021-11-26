@@ -91,6 +91,7 @@ As a first step, let's gather the child class's getter function addresses. Keep 
 &type_info=0x5589d8f32d00     (name=N12_GLOBAL__N_117VirtualChildClassE):
 ```
 
+### Contents of the vtable
 Now let's see what's in the memory location our `vptr` points to. To simplify the output, let's just assume that `vptr` points to `vtable[]`:
 
 ```Shell
@@ -110,4 +111,4 @@ A summary is sketched below:
 
 ## Literature
 
-For a good introduction I can highly recommend [Pablo Arias' "Understandig Virtual Tables in C++"](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/).
+For a good introduction I can highly recommend [Pablo Arias' "Understandig Virtual Tables in C++"](https://pabloariasal.github.io/2017/06/10/understanding-virtual-tables/). Also noteworthy: [Shahar Mike's "C++ vtables"](https://shaharmike.com/cpp/vtable-part1/).
