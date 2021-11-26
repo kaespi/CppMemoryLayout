@@ -8,7 +8,7 @@ add_executable(${TARGET}
     address_helper.h
     type_helper.h)
 
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 17)
 
 # note: we do some rather nasty cast from a function pointer to a void pointer. This is not
 #       accepted usually. Therefore this needs to be suppressed, hence -Wno-pmf-conversion.
