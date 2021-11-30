@@ -28,7 +28,7 @@ PlainOldData: (instance size=16bytes)
 
 ## Basic Class ("PlainClass")
 
-Let's build a class out of the struct, introduce a constructor and destructor, make `b` a private member, and add public getters for `b` and `c`. Since the getter functions as well as the constructors and destructors are part of the text section of the program in memory, the size of the class still remains the same. Noteworthy maybe (I hope you already kew though): The members are located in memory according to the order of their declaration. Public/private doesn't matter:
+Let's build a class out of the struct, introduce a constructor and destructor, make `b` a private member, and add public getters for `b` and `c`. Since the getter functions as well as the constructors and destructors are part of the _text section_ of the program in memory, the size of the class still remains the same. Noteworthy maybe (I hope you already knew though): The members are located in memory according to the order of their declaration. Public/private doesn't matter:
 
 ```Shell
 PlainClass: (instance size=16bytes)
@@ -40,7 +40,7 @@ PlainClass: (instance size=16bytes)
 
 ## <a name="e3">Virtual Class Example ("VirtualChildClass")</a>
 
-The same as in the previous section, but now the class is derived from some base class (which doesn't have any members, except two pure virtual getters for `b` and `c`). All statements apply again, as we don't do any runtime type resolution (yet). However, we observe that the size of the class in memory increased by 8 bytes. Namely, 8 bytes were squeezed just before the first data member:
+The same as in the previous section, but now the class is derived from some base class (which doesn't have any members, except two pure virtual getters for `b` and `c`). All statements apply again, as we don't do any runtime type resolution (yet). However, we observe that the size of the class in memory increased by 8 bytes. Namely, 8 bytes were squeezed in just before the first data member:
 
 ```Shell
 VirtualChildClass: (instance size=24bytes)
@@ -101,9 +101,9 @@ Now let's see what's in the memory location our `vptr` points to. To simplify th
   vtable[1]=0x5589d8f2f332   (=VirtualChildClass::get_c())
 ```
 
-Ok, that's interesting. The `vptr` points to the third entry in the `vtable` actually (the first entry should be the offset and =0 in our example). That's however, totally meaningful, as normally you don't want to access the type information but rather the virtual functions. So it's more efficient to let `vptr` point to the first virtual function, rather than the actual beginning of `vtable`. Note that this is compiler specific. My GCC has implemented it this way, your compiler might do it differently! And don't even mentino multiple inheritance....
+Ok, that's interesting. The `vptr` points to the third entry in the `vtable` actually (the first entry should be the offset and =0 in our example). That's however, totally meaningful, as normally you don't want to access the type information but rather the virtual functions. So it's more efficient to let `vptr` point to the first virtual function, rather than the actual beginning of `vtable`. Note that this is compiler specific. My GCC has implemented it this way, your compiler might do it differently! And don't even mention multiple inheritance....
 
-Luckily, the compiler takes care of that all, and we dont' need to worry.
+Luckily, the compiler takes care of that all, and we don't need to worry.
 
 A summary is sketched below:
 
